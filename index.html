@@ -3,124 +3,1089 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Sky Moon Discord közösség – csatlakozz a közösséghez!">
-  <title>Sky Moon | Discord Community</title>
+
+  <meta name="theme-color" content="#050817">
+  <meta
+    name="description"
+    content="Sky Moon — egy különleges Discord közösség a csillagok alatt."
+  >
+
+  <title>Sky Moon — A közösség a csillagok alatt</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="stars"></div>
+
+  <!-- =====================================================
+       BACKGROUND
+  ====================================================== -->
+
+  <div class="background">
+
+    <div class="stars"></div>
+
+    <div class="nebula nebula-one"></div>
+    <div class="nebula nebula-two"></div>
+
+    <div class="shooting-star shooting-star-one"></div>
+    <div class="shooting-star shooting-star-two"></div>
+
+  </div>
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
 
   <header class="site-header">
-    <a class="brand" href="#home" aria-label="Sky Moon főoldal">
-      <img src="assets/sky-moon-logo.png" alt="Sky Moon logó">
-      <span>SKY MOON</span>
+
+    <a href="#home" class="brand">
+
+      <div class="brand-logo">
+        <img
+          src="assets/sky-moon-logo.png"
+          alt="Sky Moon"
+        >
+      </div>
+
+      <div class="brand-text">
+        <strong>SKY MOON</strong>
+        <span>DISCORD COMMUNITY</span>
+      </div>
+
     </a>
 
-    <button class="menu-toggle" aria-label="Menü megnyitása" aria-expanded="false">☰</button>
 
     <nav class="nav" id="nav">
-      <a href="#home">Főoldal</a>
-      <a href="#about">Rólunk</a>
-      <a href="#features">Közösség</a>
-      <a href="#rules">Szabályzat</a>
-      <a href="#staff">Staff</a>
+
+      <a href="#home" class="active">
+        Főoldal
+      </a>
+
+      <a href="#about">
+        Rólunk
+      </a>
+
+      <a href="#features">
+        Funkciók
+      </a>
+
+      <a href="#rules">
+        Szabályzat
+      </a>
+
+      <a href="#staff">
+        Staff
+      </a>
+
     </nav>
 
-    <a class="nav-join" href="DISCORD_MEGHIVO_LINK" target="_blank" rel="noopener">Csatlakozás</a>
+
+    <div class="header-actions">
+
+      <a
+        href="DISCORD_MEGHIVO_LINK"
+        target="_blank"
+        rel="noopener"
+        class="header-discord"
+      >
+        <span>Discord</span>
+        <span class="arrow">↗</span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Menü"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+
   </header>
 
+
+
   <main>
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
     <section class="hero" id="home">
+
       <div class="hero-content">
-        <p class="eyebrow">🌙 ÜDVÖZLÜNK A SKY MOONBAN</p>
-        <h1>Találkozzunk <span>a Holdfény alatt.</span></h1>
-        <p class="hero-text">
-          Egy barátságos Discord közösség, ahol a jó hangulat, a játék és az együtt töltött idő kapja a főszerepet.
+
+        <div class="status-badge">
+
+          <span class="status-dot"></span>
+
+          <span>
+            A SKY MOON KÖZÖSSÉG ONLINE
+          </span>
+
+        </div>
+
+
+        <h1>
+
+          Ahol a
+          <span class="gradient-text">
+            közösség
+          </span>
+
+          életre kel.
+
+        </h1>
+
+
+        <p class="hero-description">
+
+          Lépj be a Sky Moon világába, ahol a jó társaság,
+          a játék, az AI és a közösségi élmények egyetlen
+          különleges Discord szerveren találkoznak.
+
         </p>
-        <div class="hero-buttons">
-          <a class="btn primary" href="DISCORD_MEGHIVO_LINK" target="_blank" rel="noopener">💬 Belépés a Discordra</a>
-          <a class="btn secondary" href="#about">Felfedezem ↓</a>
+
+
+        <div class="hero-actions">
+
+          <a
+            href="DISCORD_MEGHIVO_LINK"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-primary"
+          >
+
+            <span class="btn-icon">✦</span>
+
+            Csatlakozás a Discordhoz
+
+            <span class="btn-arrow">→</span>
+
+          </a>
+
+
+          <a
+            href="#features"
+            class="btn btn-secondary"
+          >
+
+            Felfedezem
+
+            <span>↓</span>
+
+          </a>
+
         </div>
-        <div class="stats">
-          <div><strong>🌌</strong><span>Sky Moon</span></div>
-          <div><strong>🤖</strong><span>Aktív bot</span></div>
-          <div><strong>🎫</strong><span>Ticket rendszer</span></div>
+
+
+        <div class="hero-mini-stats">
+
+          <div class="mini-stat">
+
+            <strong id="memberCount">
+              —
+            </strong>
+
+            <span>
+              Tag
+            </span>
+
+          </div>
+
+
+          <div class="mini-divider"></div>
+
+
+          <div class="mini-stat">
+
+            <strong id="onlineCount">
+              —
+            </strong>
+
+            <span>
+              Online
+            </span>
+
+          </div>
+
+
+          <div class="mini-divider"></div>
+
+
+          <div class="mini-stat">
+
+            <strong>
+              24/7
+            </strong>
+
+            <span>
+              Közösség
+            </span>
+
+          </div>
+
         </div>
+
       </div>
 
-      <div class="hero-logo">
-        <div class="logo-glow"></div>
-        <img src="assets/sky-moon-logo.png" alt="Sky Moon">
+
+
+      <!-- =================================================
+           HERO VISUAL
+      ================================================== -->
+
+      <div class="hero-visual">
+
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+
+
+        <div class="moon-glow"></div>
+
+
+        <div class="moon">
+
+          <div class="moon-shadow moon-shadow-one"></div>
+          <div class="moon-shadow moon-shadow-two"></div>
+          <div class="moon-shadow moon-shadow-three"></div>
+
+          <img
+            src="assets/sky-moon-logo.png"
+            alt="Sky Moon logó"
+          >
+
+        </div>
+
+
+        <div class="floating-card card-online">
+
+          <span class="floating-icon">
+            🟢
+          </span>
+
+          <div>
+            <strong>
+              Online
+            </strong>
+
+            <small>
+              Sky Moon
+            </small>
+          </div>
+
+        </div>
+
+
+        <div class="floating-card card-bot">
+
+          <span class="floating-icon">
+            🤖
+          </span>
+
+          <div>
+            <strong>
+              Sky Moon Bot
+            </strong>
+
+            <small>
+              AI rendszer
+            </small>
+          </div>
+
+        </div>
+
+
+        <div class="floating-card card-community">
+
+          <span class="floating-icon">
+            ✨
+          </span>
+
+          <div>
+            <strong>
+              Közösség
+            </strong>
+
+            <small>
+              Mindig együtt
+            </small>
+          </div>
+
+        </div>
+
       </div>
+
     </section>
 
-    <section class="section" id="about">
-      <div class="section-heading">
-        <p class="eyebrow">RÓLUNK</p>
-        <h2>Egy hely, ahová jó visszatérni.</h2>
-        <p>A Sky Moon célja egy aktív, normális és élhető közösség létrehozása.</p>
+
+
+    <!-- =====================================================
+         MARQUEE
+    ====================================================== -->
+
+    <section class="marquee-section">
+
+      <div class="marquee">
+
+        <div class="marquee-track">
+
+          <span>✦ SKY MOON</span>
+          <span>DISCORD COMMUNITY</span>
+          <span>✦ AI POWERED</span>
+          <span>✦ GAMING</span>
+          <span>✦ FRIENDS</span>
+          <span>✦ COMMUNITY</span>
+
+          <span>✦ SKY MOON</span>
+          <span>DISCORD COMMUNITY</span>
+          <span>✦ AI POWERED</span>
+          <span>✦ GAMING</span>
+          <span>✦ FRIENDS</span>
+          <span>✦ COMMUNITY</span>
+
+        </div>
+
       </div>
-      <div class="cards">
-        <article class="card"><div class="icon">🌙</div><h3>Sky Moon hangulat</h3><p>Éjszakai, kozmikus hangulat és egyedi közösségi élmény.</p></article>
-        <article class="card"><div class="icon">🎮</div><h3>Közösség</h3><p>Beszélgetés, játék, közös programok és új ismeretségek.</p></article>
-        <article class="card"><div class="icon">🛡️</div><h3>Biztonság</h3><p>Átlátható szabályok és aktív staff a rendezett szerverért.</p></article>
-      </div>
+
     </section>
 
-    <section class="section dark-section" id="features">
-      <div class="section-heading">
-        <p class="eyebrow">KÖZÖSSÉG</p>
-        <h2>Mi vár rád?</h2>
+
+
+    <!-- =====================================================
+         ABOUT
+    ====================================================== -->
+
+    <section class="section about-section" id="about">
+
+      <div class="section-header">
+
+        <div class="section-number">
+          01
+        </div>
+
+        <div>
+
+          <p class="eyebrow">
+            RÓLUNK
+          </p>
+
+          <h2>
+            Nem csak egy szerver.
+            <span>
+              Egy közösség.
+            </span>
+          </h2>
+
+        </div>
+
       </div>
+
+
+      <div class="about-grid">
+
+        <div class="about-main">
+
+          <p class="large-text">
+
+            A Sky Moon egy olyan Discord közösség,
+            ahol mindenki megtalálhatja a helyét.
+
+          </p>
+
+          <p>
+
+            Legyen szó játékokról, beszélgetésről,
+            közös programokról vagy egyszerűen csak
+            egy jó társaságról, nálunk mindig történik valami.
+
+          </p>
+
+        </div>
+
+
+        <div class="about-cards">
+
+          <article class="info-card">
+
+            <div class="info-icon">
+              🌙
+            </div>
+
+            <h3>
+              Egyedi hangulat
+            </h3>
+
+            <p>
+              Kozmikus dizájn és különleges
+              Sky Moon atmoszféra.
+            </p>
+
+          </article>
+
+
+          <article class="info-card">
+
+            <div class="info-icon">
+              🤝
+            </div>
+
+            <h3>
+              Közösség
+            </h3>
+
+            <p>
+              Ismerkedj, beszélgess és
+              tölts időt másokkal.
+            </p>
+
+          </article>
+
+
+          <article class="info-card">
+
+            <div class="info-icon">
+              🛡️
+            </div>
+
+            <h3>
+              Biztonság
+            </h3>
+
+            <p>
+              Rendezett szerver és aktív
+              moderáció.
+            </p>
+
+          </article>
+
+
+          <article class="info-card">
+
+            <div class="info-icon">
+              ⚡
+            </div>
+
+            <h3>
+              Folyamatos fejlődés
+            </h3>
+
+            <p>
+              Új funkciók és fejlesztések
+              folyamatosan.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FEATURES
+    ====================================================== -->
+
+    <section class="section features-section" id="features">
+
+      <div class="section-header">
+
+        <div class="section-number">
+          02
+        </div>
+
+        <div>
+
+          <p class="eyebrow">
+            FUNKCIÓK
+          </p>
+
+          <h2>
+            Minden, amire
+            <span>
+              szükséged lehet.
+            </span>
+          </h2>
+
+        </div>
+
+      </div>
+
+
       <div class="feature-grid">
-        <div class="feature"><span>💬</span><div><h3>Aktív chat</h3><p>Beszélgess és ismerkedj a közösség tagjaival.</p></div></div>
-        <div class="feature"><span>🤖</span><div><h3>Sky Moon Bot</h3><p>Saját Discord bot hasznos funkciókkal és AI-val.</p></div></div>
-        <div class="feature"><span>🎫</span><div><h3>Ticket rendszer</h3><p>Segítségkéréshez egyszerű és rendezett ügyintézés.</p></div></div>
-        <div class="feature"><span>🏆</span><div><h3>Programok</h3><p>Közös események és közösségi aktivitások.</p></div></div>
+
+
+        <article class="feature-card feature-large">
+
+          <div class="feature-top">
+
+            <span class="feature-icon">
+              🤖
+            </span>
+
+            <span class="feature-label">
+              AI SYSTEM
+            </span>
+
+          </div>
+
+          <h3>
+            Sky Moon AI
+          </h3>
+
+          <p>
+            Intelligens AI rendszer, amely
+            segít a közösségben és új
+            lehetőségeket biztosít.
+          </p>
+
+          <div class="feature-glow"></div>
+
+        </article>
+
+
+        <article class="feature-card">
+
+          <div class="feature-top">
+
+            <span class="feature-icon">
+              🎫
+            </span>
+
+            <span class="feature-label">
+              SUPPORT
+            </span>
+
+          </div>
+
+          <h3>
+            Ticket rendszer
+          </h3>
+
+          <p>
+            Gyors és rendezett segítségkérés
+            a staff számára.
+          </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+          <div class="feature-top">
+
+            <span class="feature-icon">
+              🛡️
+            </span>
+
+            <span class="feature-label">
+              SECURITY
+            </span>
+
+          </div>
+
+          <h3>
+            Moderáció
+          </h3>
+
+          <p>
+            Eszközök a biztonságos és
+            kulturált közösségért.
+          </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+          <div class="feature-top">
+
+            <span class="feature-icon">
+              🎮
+            </span>
+
+            <span class="feature-label">
+              GAMING
+            </span>
+
+          </div>
+
+          <h3>
+            Gaming
+          </h3>
+
+          <p>
+            Játékok, beszélgetések és
+            közös programok.
+          </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+          <div class="feature-top">
+
+            <span class="feature-icon">
+              🏆
+            </span>
+
+            <span class="feature-label">
+              EVENTS
+            </span>
+
+          </div>
+
+          <h3>
+            Események
+          </h3>
+
+          <p>
+            Közösségi események és
+            különleges aktivitások.
+          </p>
+
+        </article>
+
+
+        <article class="feature-card">
+
+          <div class="feature-top">
+
+            <span class="feature-icon">
+              ✨
+            </span>
+
+            <span class="feature-label">
+              COMMUNITY
+            </span>
+
+          </div>
+
+          <h3>
+            Aktív közösség
+          </h3>
+
+          <p>
+            Egy hely, ahol mindig van
+            kivel beszélgetni.
+          </p>
+
+        </article>
+
+
       </div>
+
     </section>
 
-    <section class="section" id="rules">
-      <div class="section-heading">
-        <p class="eyebrow">SZABÁLYZAT</p>
-        <h2>A Holdfény alatt mindenki számít.</h2>
+
+
+    <!-- =====================================================
+         LIVE DISCORD
+    ====================================================== -->
+
+    <section class="discord-section">
+
+      <div class="discord-panel">
+
+        <div class="discord-content">
+
+          <div class="live-badge">
+
+            <span></span>
+
+            LIVE
+
+          </div>
+
+          <p class="eyebrow">
+            DISCORD
+          </p>
+
+          <h2>
+            Találkozzunk
+            <span>
+              odabent.
+            </span>
+          </h2>
+
+          <p>
+            Csatlakozz a Sky Moon Discord szerverhez
+            és légy része a közösségnek.
+          </p>
+
+          <a
+            href="DISCORD_MEGHIVO_LINK"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-primary"
+          >
+            Belépés a szerverre →
+          </a>
+
+        </div>
+
+
+        <div class="discord-visual">
+
+          <div class="discord-orb">
+
+            <span>
+              💬
+            </span>
+
+          </div>
+
+        </div>
+
       </div>
-      <div class="rules">
-        <div><b>01</b><span>Beszélj tisztelettel másokkal.</span></div>
-        <div><b>02</b><span>Ne spamelj és ne zavard a közösséget.</span></div>
-        <div><b>03</b><span>Tartsd be a Discord és a szerver szabályait.</span></div>
-        <div><b>04</b><span>A staff döntéseit kulturáltan kezeld.</span></div>
-      </div>
+
     </section>
 
-    <section class="section" id="staff">
-      <div class="section-heading">
-        <p class="eyebrow">STAFF</p>
-        <h2>A Sky Moon csapata</h2>
-        <p>A neveket később egyszerűen ki tudjuk cserélni a valódi staff tagokra.</p>
+
+
+    <!-- =====================================================
+         RULES
+    ====================================================== -->
+
+    <section class="section rules-section" id="rules">
+
+      <div class="section-header">
+
+        <div class="section-number">
+          03
+        </div>
+
+        <div>
+
+          <p class="eyebrow">
+            SZABÁLYZAT
+          </p>
+
+          <h2>
+            Tartsuk együtt
+            <span>
+              jó helynek.
+            </span>
+          </h2>
+
+        </div>
+
       </div>
+
+
+      <div class="rules-list">
+
+        <div class="rule">
+
+          <span>
+            01
+          </span>
+
+          <div>
+
+            <h3>
+              Tisztelet
+            </h3>
+
+            <p>
+              Bánj kulturáltan és tisztelettel
+              a közösség többi tagjával.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="rule">
+
+          <span>
+            02
+          </span>
+
+          <div>
+
+            <h3>
+              Ne spamelj
+            </h3>
+
+            <p>
+              Kerüld a floodot, spamet és
+              a közösség zavarását.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="rule">
+
+          <span>
+            03
+          </span>
+
+          <div>
+
+            <h3>
+              Discord szabályok
+            </h3>
+
+            <p>
+              Tartsd be a Discord általános
+              szabályait és irányelveit.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="rule">
+
+          <span>
+            04
+          </span>
+
+          <div>
+
+            <h3>
+              Staff
+            </h3>
+
+            <p>
+              A problémákat kulturáltan,
+              a staff segítségével kezeld.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STAFF
+    ====================================================== -->
+
+    <section class="section staff-section" id="staff">
+
+      <div class="section-header">
+
+        <div class="section-number">
+          04
+        </div>
+
+        <div>
+
+          <p class="eyebrow">
+            STAFF
+          </p>
+
+          <h2>
+            Akik a Sky Moont
+            <span>
+              működtetik.
+            </span>
+          </h2>
+
+        </div>
+
+      </div>
+
+
       <div class="staff-grid">
-        <article class="staff-card"><div class="avatar">👑</div><h3>Tulajdonos</h3><p>Sky Moon Owner</p></article>
-        <article class="staff-card"><div class="avatar">🛡️</div><h3>Admin</h3><p>Sky Moon Admin</p></article>
-        <article class="staff-card"><div class="avatar">🔧</div><h3>Moderátor</h3><p>Sky Moon Staff</p></article>
+
+
+        <article class="staff-card">
+
+          <div class="staff-avatar">
+            👑
+          </div>
+
+          <div class="staff-role">
+            OWNER
+          </div>
+
+          <h3>
+            Sky Moon Owner
+          </h3>
+
+          <p>
+            Tulajdonos
+          </p>
+
+        </article>
+
+
+        <article class="staff-card">
+
+          <div class="staff-avatar">
+            🛡️
+          </div>
+
+          <div class="staff-role">
+            ADMIN
+          </div>
+
+          <h3>
+            Sky Moon Admin
+          </h3>
+
+          <p>
+            Adminisztrátor
+          </p>
+
+        </article>
+
+
+        <article class="staff-card">
+
+          <div class="staff-avatar">
+            🔧
+          </div>
+
+          <div class="staff-role">
+            MODERATOR
+          </div>
+
+          <h3>
+            Sky Moon Staff
+          </h3>
+
+          <p>
+            Moderátor
+          </p>
+
+        </article>
+
+
       </div>
+
     </section>
 
-    <section class="cta">
-      <div>
-        <p class="eyebrow">🌙 CSATLAKOZZ</p>
-        <h2>Készen állsz belépni a Sky Moonba?</h2>
-        <p>Találkozunk a Discordon.</p>
+
+
+    <!-- =====================================================
+         FINAL CTA
+    ====================================================== -->
+
+    <section class="final-cta">
+
+      <div class="final-glow"></div>
+
+      <div class="final-content">
+
+        <p class="eyebrow">
+          🌙 SKY MOON
+        </p>
+
+        <h2>
+          A következő
+          <span>
+            kalandod itt kezdődik.
+          </span>
+        </h2>
+
+        <p>
+          Csatlakozz hozzánk a Discordon.
+        </p>
+
+        <a
+          href="DISCORD_MEGHIVO_LINK"
+          target="_blank"
+          rel="noopener"
+          class="btn btn-primary btn-large"
+        >
+          🚀 Csatlakozom a Sky Moonhoz
+        </a>
+
       </div>
-      <a class="btn primary" href="DISCORD_MEGHIVO_LINK" target="_blank" rel="noopener">💬 Csatlakozom</a>
+
     </section>
+
   </main>
 
-  <footer>
-    <div class="footer-brand"><img src="assets/sky-moon-logo.png" alt=""> <span>SKY MOON</span></div>
-    <p>© 2026 Sky Moon. Minden jog fenntartva.</p>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer class="footer">
+
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+
+        <img
+          src="assets/sky-moon-logo.png"
+          alt="Sky Moon"
+        >
+
+        <div>
+
+          <strong>
+            SKY MOON
+          </strong>
+
+          <span>
+            Discord Community
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <a href="#home">
+          Főoldal
+        </a>
+
+        <a href="#about">
+          Rólunk
+        </a>
+
+        <a href="#features">
+          Funkciók
+        </a>
+
+        <a href="#rules">
+          Szabályzat
+        </a>
+
+      </div>
+
+
+      <div class="footer-copy">
+
+        © 2026 Sky Moon
+
+      </div>
+
+    </div>
+
   </footer>
 
+
+
   <script src="script.js"></script>
+
 </body>
 </html>
