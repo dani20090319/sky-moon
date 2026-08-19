@@ -29,7 +29,7 @@ document.querySelectorAll(".nav a").forEach(link => {
    SKY MOON LIVE DISCORD
 ========================================================= */
 
-const API_URL = "http://127.0.0.1:3002/api/server";
+const API_URL = "https://notre-visit-gospel-true.trycloudflare.com/api/server";
 
 /*
   Ha később a weboldalt Cloudflare Tunnelön vagy más
