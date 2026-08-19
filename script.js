@@ -1,508 +1,369 @@
+const toggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector("#nav");
+
 /* =========================================================
-   SKY MOON 2.0 — MAIN JAVASCRIPT
+   MOBIL MENÜ
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+toggle?.addEventListener("click", () => {
+  const open = nav.classList.toggle("open");
 
-  /* =======================================================
-     MOBILE MENU
-  ======================================================== */
-
-  const menuToggle = document.querySelector("#menuToggle");
-  const nav = document.querySelector("#nav");
-
-  if (menuToggle && nav) {
-
-    menuToggle.addEventListener("click", () => {
-
-      const isOpen = nav.classList.toggle("open");
-
-      menuToggle.setAttribute(
-        "aria-expanded",
-        String(isOpen)
-      );
-
-    });
-
-
-    nav.querySelectorAll("a").forEach(link => {
-
-      link.addEventListener("click", () => {
-
-        nav.classList.remove("open");
-
-        menuToggle.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-
-      });
-
-    });
-
-  }
-
-
-  /* =======================================================
-     ACTIVE NAVIGATION
-  ======================================================== */
-
-  const sections = document.querySelectorAll(
-    "main section[id]"
+  toggle.setAttribute(
+    "aria-expanded",
+    String(open)
   );
+});
 
-  const navLinks = document.querySelectorAll(
-    ".nav a"
-  );
+document.querySelectorAll(".nav a").forEach(link => {
+  link.addEventListener("click", () => {
+    nav.classList.remove("open");
 
-
-  const updateActiveNavigation = () => {
-
-    let currentSection = "home";
-
-    const scrollPosition =
-      window.scrollY + 180;
-
-
-    sections.forEach(section => {
-
-      const sectionTop =
-        section.offsetTop;
-
-      if (scrollPosition >= sectionTop) {
-        currentSection = section.id;
-      }
-
-    });
-
-
-    navLinks.forEach(link => {
-
-      const target =
-        link.getAttribute("href");
-
-      link.classList.toggle(
-        "active",
-        target === `#${currentSection}`
-      );
-
-    });
-
-  };
-
-
-  window.addEventListener(
-    "scroll",
-    updateActiveNavigation,
-    { passive: true }
-  );
-
-  updateActiveNavigation();
-
-
-  /* =======================================================
-     REVEAL ANIMATIONS
-  ======================================================== */
-
-  const revealElements = document.querySelectorAll(
-    ".section-header, .info-card, .feature-card, .rule, .staff-card, .discord-panel, .final-content"
-  );
-
-
-  revealElements.forEach(element => {
-
-    element.style.opacity = "0";
-
-    element.style.transform =
-      "translateY(25px)";
-
-    element.style.transition =
-      "opacity .7s ease, transform .7s ease";
-
+    toggle?.setAttribute(
+      "aria-expanded",
+      "false"
+    );
   });
+});
 
+/* =========================================================
+   SKY MOON LIVE DISCORD
+========================================================= */
 
-  const revealObserver =
-    new IntersectionObserver(
-      entries => {
+const API_URL = "http://127.0.0.1:3002/api/server";
 
-        entries.forEach(entry => {
+/*
+  Ha később a weboldalt Cloudflare Tunnelön vagy más
+  publikus címen használjuk, ezt az URL-t át kell majd
+  írni a publikus API címére.
+*/
 
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-          entry.target.style.opacity = "1";
-
-          entry.target.style.transform =
-            "translateY(0)";
-
-          revealObserver.unobserve(
-            entry.target
-          );
-
-        });
-
-      },
-      {
-        threshold: 0.12
-      }
-    );
-
-
-  revealElements.forEach(element => {
-    revealObserver.observe(element);
-  });
-
-
-  /* =======================================================
-     MOUSE PARALLAX
-  ======================================================== */
-
-  const heroVisual =
-    document.querySelector(".hero-visual");
-
-  const moon =
-    document.querySelector(".moon");
-
-  const orbits =
-    document.querySelectorAll(".orbit");
-
-
-  if (
-    heroVisual &&
-    moon &&
-    window.matchMedia(
-      "(pointer: fine)"
-    ).matches
-  ) {
-
-    heroVisual.addEventListener(
-      "mousemove",
-      event => {
-
-        const rect =
-          heroVisual.getBoundingClientRect();
-
-        const x =
-          (event.clientX - rect.left)
-          / rect.width
-          - 0.5;
-
-        const y =
-          (event.clientY - rect.top)
-          / rect.height
-          - 0.5;
-
-
-        moon.style.transform =
-          `translate(${x * 10}px, ${y * 10}px)`;
-
-
-        orbits.forEach(
-          (orbit, index) => {
-
-            const amount =
-              index === 0
-                ? 8
-                : -6;
-
-            orbit.style.marginLeft =
-              `${x * amount}px`;
-
-            orbit.style.marginTop =
-              `${y * amount}px`;
-
-          }
-        );
-
-      }
-    );
-
-
-    heroVisual.addEventListener(
-      "mouseleave",
-      () => {
-
-        moon.style.transform = "";
-
-        orbits.forEach(orbit => {
-
-          orbit.style.marginLeft = "";
-          orbit.style.marginTop = "";
-
-        });
-
-      }
-    );
-
-  }
-
-
-  /* =======================================================
-     CARD TILT
-  ======================================================== */
-
-  const cards =
-    document.querySelectorAll(
-      ".info-card, .feature-card, .staff-card"
-    );
-
-
-  if (
-    window.matchMedia(
-      "(pointer: fine)"
-    ).matches
-  ) {
-
-    cards.forEach(card => {
-
-      card.addEventListener(
-        "mousemove",
-        event => {
-
-          const rect =
-            card.getBoundingClientRect();
-
-          const x =
-            event.clientX - rect.left;
-
-          const y =
-            event.clientY - rect.top;
-
-
-          const rotateY =
-            ((x / rect.width) - 0.5) * 5;
-
-          const rotateX =
-            ((y / rect.height) - 0.5) * -5;
-
-
-          card.style.transform =
-            `perspective(700px)
-             rotateX(${rotateX}deg)
-             rotateY(${rotateY}deg)
-             translateY(-5px)`;
-
-        }
-      );
-
-
-      card.addEventListener(
-        "mouseleave",
-        () => {
-
-          card.style.transform = "";
-
-        }
-      );
-
+async function loadDiscordData() {
+  try {
+    const response = await fetch(API_URL, {
+      cache: "no-store"
     });
 
-  }
-
-
-  /* =======================================================
-     COUNTER ANIMATION
-  ======================================================== */
-
-  const animateCounter = (
-    element,
-    target,
-    duration = 1200
-  ) => {
-
-    if (!element) {
-      return;
+    if (!response.ok) {
+      throw new Error(
+        `HTTP ${response.status}`
+      );
     }
 
+    const data = await response.json();
 
-    const startTime =
-      performance.now();
+    if (!data.ok) {
+      throw new Error(
+        data.error || "API hiba"
+      );
+    }
 
+    updateDiscordUI(data);
 
-    const update = currentTime => {
-
-      const progress =
-        Math.min(
-          (currentTime - startTime)
-          / duration,
-          1
-        );
-
-
-      const eased =
-        1 - Math.pow(1 - progress, 3);
-
-
-      const value =
-        Math.floor(target * eased);
-
-
-      element.textContent =
-        value.toLocaleString("hu-HU");
-
-
-      if (progress < 1) {
-
-        requestAnimationFrame(update);
-
-      }
-
-    };
-
-
-    requestAnimationFrame(update);
-
-  };
-
-
-  /* =======================================================
-     DEMO STATS
-     
-     Ezeket később a Discord API adataira
-     cseréljük.
-  ======================================================== */
-
-  const memberCount =
-    document.querySelector("#memberCount");
-
-  const onlineCount =
-    document.querySelector("#onlineCount");
-
-
-  const statsObserver =
-    new IntersectionObserver(
-      entries => {
-
-        entries.forEach(entry => {
-
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-
-          animateCounter(
-            memberCount,
-            0
-          );
-
-
-          animateCounter(
-            onlineCount,
-            0
-          );
-
-
-          statsObserver.unobserve(
-            entry.target
-          );
-
-        });
-
-      },
-      {
-        threshold: .5
-      }
+  } catch (error) {
+    console.error(
+      "❌ Discord API hiba:",
+      error
     );
 
+    showOfflineState();
+  }
+}
 
-  if (memberCount) {
-    statsObserver.observe(memberCount);
+/* =========================================================
+   ADATOK MEGJELENÍTÉSE
+========================================================= */
+
+function updateDiscordUI(data) {
+  const server = data.server;
+  const bot = data.bot;
+
+  /*
+    Ha még nincs Live panel az index.html-ben,
+    automatikusan létrehozzuk.
+  */
+
+  let panel =
+    document.querySelector(
+      "#discord-live-panel"
+    );
+
+  if (!panel) {
+    panel = createLivePanel();
   }
 
+  const serverName =
+    panel.querySelector(
+      "[data-server-name]"
+    );
 
-  /* =======================================================
-     HEADER SCROLL EFFECT
-  ======================================================== */
+  const serverIcon =
+    panel.querySelector(
+      "[data-server-icon]"
+    );
 
-  const header =
-    document.querySelector(".site-header");
+  const members =
+    panel.querySelector(
+      "[data-members]"
+    );
 
+  const online =
+    panel.querySelector(
+      "[data-online]"
+    );
 
-  const updateHeader =
-    () => {
+  const channels =
+    panel.querySelector(
+      "[data-channels]"
+    );
 
-      if (!header) {
-        return;
-      }
+  const roles =
+    panel.querySelector(
+      "[data-roles]"
+    );
 
+  const botName =
+    panel.querySelector(
+      "[data-bot-name]"
+    );
 
-      if (window.scrollY > 20) {
+  const botStatus =
+    panel.querySelector(
+      "[data-bot-status]"
+    );
 
-        header.style.background =
-          "rgba(3,4,13,.88)";
+  if (serverName) {
+    serverName.textContent =
+      server.name;
+  }
 
-      } else {
+  if (serverIcon && server.icon) {
+    serverIcon.src =
+      server.icon;
+  }
 
-        header.style.background =
-          "rgba(3,4,13,.72)";
+  if (members) {
+    members.textContent =
+      server.members;
+  }
 
-      }
+  if (online) {
+    online.textContent =
+      server.online;
+  }
 
-    };
+  if (channels) {
+    channels.textContent =
+      server.channels;
+  }
 
+  if (roles) {
+    roles.textContent =
+      server.roles;
+  }
 
-  window.addEventListener(
-    "scroll",
-    updateHeader,
-    { passive: true }
-  );
+  if (botName) {
+    botName.textContent =
+      bot.username;
+  }
 
+  if (botStatus) {
+    botStatus.textContent =
+      "● ONLINE";
 
-  updateHeader();
+    botStatus.classList.remove(
+      "offline"
+    );
+  }
+}
 
+/* =========================================================
+   LIVE PANEL LÉTREHOZÁSA
+========================================================= */
 
-  /* =======================================================
-     SMOOTH ANCHOR FALLBACK
-  ======================================================== */
+function createLivePanel() {
+  const panel =
+    document.createElement("section");
 
-  document
-    .querySelectorAll('a[href^="#"]')
-    .forEach(link => {
+  panel.id =
+    "discord-live-panel";
 
-      link.addEventListener(
-        "click",
-        event => {
+  panel.className =
+    "discord-live-panel";
 
-          const id =
-            link.getAttribute("href");
+  panel.innerHTML = `
+    <div class="live-panel-inner">
 
-          if (!id || id === "#") {
-            return;
-          }
+      <div class="live-header">
 
+        <div class="live-server">
 
-          const target =
-            document.querySelector(id);
+          <img
+            data-server-icon
+            class="live-server-icon"
+            src=""
+            alt="Sky Moon"
+          >
 
-          if (!target) {
-            return;
-          }
+          <div>
+            <span class="live-label">
+              🔴 LIVE DISCORD
+            </span>
 
+            <h2 data-server-name>
+              Sky Moon
+            </h2>
+          </div>
 
-          event.preventDefault();
+        </div>
 
+        <div
+          class="live-status"
+          data-bot-status
+        >
+          ● ONLINE
+        </div>
 
-          target.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
+      </div>
 
-        }
-      );
+      <div class="live-stats">
 
-    });
+        <div class="live-stat">
+          <span>👥</span>
+          <strong data-members>
+            —
+          </strong>
+          <small>
+            TAG
+          </small>
+        </div>
 
+        <div class="live-stat">
+          <span>🟢</span>
+          <strong data-online>
+            —
+          </strong>
+          <small>
+            ONLINE
+          </small>
+        </div>
 
-  console.log(
-    "%c🌙 SKY MOON",
-    "font-size:24px;font-weight:900;color:#8b9cff"
-  );
+        <div class="live-stat">
+          <span>💬</span>
+          <strong data-channels>
+            —
+          </strong>
+          <small>
+            CSATORNA
+          </small>
+        </div>
 
-  console.log(
-    "%cSky Moon Web 2.0 elindult.",
-    "font-size:13px;color:#aab4d3"
-  );
+        <div class="live-stat">
+          <span>🛡️</span>
+          <strong data-roles>
+            —
+          </strong>
+          <small>
+            RANG
+          </small>
+        </div>
 
-});
+      </div>
+
+      <div class="live-bot">
+
+        <div class="bot-icon">
+          🤖
+        </div>
+
+        <div>
+          <span>
+            SKY MOON BOT
+          </span>
+
+          <strong data-bot-name>
+            Sky Moon Bot
+          </strong>
+        </div>
+
+        <div class="bot-online">
+          🟢
+        </div>
+
+      </div>
+
+      <a
+        class="live-join"
+        href="https://discord.gg/NUKqszMKup"
+        target="_blank"
+        rel="noopener"
+      >
+        💬 CSATLAKOZÁS A DISCORDHOZ
+      </a>
+
+    </div>
+  `;
+
+  /*
+    A CTA elé rakjuk, így nem kell kézzel
+    átalakítanunk az index.html-t.
+  */
+
+  const cta =
+    document.querySelector(".cta");
+
+  if (cta) {
+    cta.parentNode.insertBefore(
+      panel,
+      cta
+    );
+  } else {
+    document
+      .querySelector("main")
+      ?.appendChild(panel);
+  }
+
+  return panel;
+}
+
+/* =========================================================
+   OFFLINE ÁLLAPOT
+========================================================= */
+
+function showOfflineState() {
+  const panel =
+    document.querySelector(
+      "#discord-live-panel"
+    );
+
+  if (!panel) return;
+
+  const status =
+    panel.querySelector(
+      "[data-bot-status]"
+    );
+
+  if (status) {
+    status.textContent =
+      "● OFFLINE";
+
+    status.classList.add(
+      "offline"
+    );
+  }
+}
+
+/* =========================================================
+   INDÍTÁS
+========================================================= */
+
+loadDiscordData();
+
+/*
+  10 másodpercenként frissítjük
+  az élő Discord adatokat.
+*/
+
+setInterval(
+  loadDiscordData,
+  10000
+);
