@@ -27,8 +27,17 @@ document.querySelectorAll(".nav a").forEach(link => {
 
 
 /* =========================================================
-   SKY MOON LIVE DISCORD
+   SKY MOON LIVE DISCORD API
 ========================================================= */
+
+/*
+  PUBLIKUS API
+
+  Fontos:
+  A Cloudflare Quick Tunnel ideiglenes.
+  Ha új tunnel URL-t kapsz, ezt az egy sort kell
+  majd átírni.
+*/
 
 const API_URL =
   "https://notre-visit-gospel-true.trycloudflare.com/api/server";
@@ -46,21 +55,31 @@ async function loadDiscordData() {
       cache: "no-store"
     });
 
+
     if (!response.ok) {
+
       throw new Error(
         `HTTP ${response.status}`
       );
+
     }
 
-    const data = await response.json();
+
+    const data =
+      await response.json();
+
 
     if (!data.ok) {
+
       throw new Error(
         data.error || "API hiba"
       );
+
     }
 
+
     updateDiscordUI(data);
+
 
   } catch (error) {
 
@@ -77,15 +96,38 @@ async function loadDiscordData() {
 
 
 /* =========================================================
-   FŐOLDAL STATISZTIKÁK
+   DISCORD ADATOK MEGJELENÍTÉSE
 ========================================================= */
 
-function updateHeroStats(server) {
+function updateDiscordUI(data) {
 
-  /* TAGOK */
+  const server =
+    data.server;
+
+  const bot =
+    data.bot;
+
+
+  if (!server) {
+    return;
+  }
+
+
+  /* =====================================================
+     FELSŐ HERO STATISZTIKÁK
+  ===================================================== */
 
   const memberCount =
-    document.querySelector("#memberCount");
+    document.querySelector(
+      "#memberCount"
+    );
+
+
+  const onlineCount =
+    document.querySelector(
+      "#onlineCount"
+    );
+
 
   if (memberCount) {
 
@@ -95,11 +137,6 @@ function updateHeroStats(server) {
   }
 
 
-  /* ONLINE */
-
-  const onlineCount =
-    document.querySelector("#onlineCount");
-
   if (onlineCount) {
 
     onlineCount.textContent =
@@ -108,54 +145,9 @@ function updateHeroStats(server) {
   }
 
 
-  /* ONLINE KÁRTYA */
-
-  const floatingOnline =
-    document.querySelector(".card-online strong");
-
-  if (floatingOnline) {
-
-    floatingOnline.textContent =
-      `${server.online} Online`;
-
-  }
-
-
-  const floatingOnlineSmall =
-    document.querySelector(".card-online small");
-
-  if (floatingOnlineSmall) {
-
-    floatingOnlineSmall.textContent =
-      `${server.members} tag`;
-
-  }
-
-}
-
-
-/* =========================================================
-   DISCORD ADATOK MEGJELENÍTÉSE
-========================================================= */
-
-function updateDiscordUI(data) {
-
-  const server = data.server;
-  const bot = data.bot;
-
-
-  /*
-    A legfontosabb:
-    a HERO tetején lévő TAG és ONLINE értékek
-    frissítése.
-  */
-
-  updateHeroStats(server);
-
-
-  /*
-    LIVE PANEL
-  */
+  /* =====================================================
+     LIVE PANEL
+  ===================================================== */
 
   let panel =
     document.querySelector(
@@ -170,6 +162,10 @@ function updateDiscordUI(data) {
 
   }
 
+
+  /* =====================================================
+     LIVE PANEL ELEMEK
+  ===================================================== */
 
   const serverName =
     panel.querySelector(
@@ -219,6 +215,10 @@ function updateDiscordUI(data) {
     );
 
 
+  /* =====================================================
+     SZERVER NÉV
+  ===================================================== */
+
   if (serverName) {
 
     serverName.textContent =
@@ -227,13 +227,24 @@ function updateDiscordUI(data) {
   }
 
 
-  if (serverIcon && server.icon) {
+  /* =====================================================
+     SZERVER IKON
+  ===================================================== */
+
+  if (
+    serverIcon &&
+    server.icon
+  ) {
 
     serverIcon.src =
       server.icon;
 
   }
 
+
+  /* =====================================================
+     TAGOK
+  ===================================================== */
 
   if (members) {
 
@@ -243,6 +254,10 @@ function updateDiscordUI(data) {
   }
 
 
+  /* =====================================================
+     ONLINE
+  ===================================================== */
+
   if (online) {
 
     online.textContent =
@@ -250,6 +265,10 @@ function updateDiscordUI(data) {
 
   }
 
+
+  /* =====================================================
+     CSATORNÁK
+  ===================================================== */
 
   if (channels) {
 
@@ -259,6 +278,10 @@ function updateDiscordUI(data) {
   }
 
 
+  /* =====================================================
+     RANGOK
+  ===================================================== */
+
   if (roles) {
 
     roles.textContent =
@@ -267,22 +290,30 @@ function updateDiscordUI(data) {
   }
 
 
-  if (botName) {
+  /* =====================================================
+     BOT
+  ===================================================== */
 
-    botName.textContent =
-      bot.username;
+  if (bot) {
 
-  }
+    if (botName) {
+
+      botName.textContent =
+        bot.username;
+
+    }
 
 
-  if (botStatus) {
+    if (botStatus) {
 
-    botStatus.textContent =
-      "● ONLINE";
+      botStatus.textContent =
+        "● ONLINE";
 
-    botStatus.classList.remove(
-      "offline"
-    );
+      botStatus.classList.remove(
+        "offline"
+      );
+
+    }
 
   }
 
@@ -296,7 +327,9 @@ function updateDiscordUI(data) {
 function createLivePanel() {
 
   const panel =
-    document.createElement("section");
+    document.createElement(
+      "section"
+    );
 
 
   panel.id =
@@ -417,6 +450,7 @@ function createLivePanel() {
           🤖
         </div>
 
+
         <div>
 
           <span>
@@ -428,6 +462,7 @@ function createLivePanel() {
           </strong>
 
         </div>
+
 
         <div class="bot-online">
           🟢
@@ -450,8 +485,14 @@ function createLivePanel() {
   `;
 
 
+  /*
+    A Live panelt a CTA elé helyezzük.
+  */
+
   const cta =
-    document.querySelector(".cta");
+    document.querySelector(
+      ".cta"
+    );
 
 
   if (cta) {
@@ -488,26 +529,17 @@ function showOfflineState() {
 
 
   /*
-    Ha a panel még nem létezik,
-    létrehozzuk, hogy az OFFLINE állapot
-    akkor is megjelenjen.
+    Ha még nincs panel,
+    nincs mit frissíteni.
   */
 
   if (!panel) {
-
-    createLivePanel();
-
+    return;
   }
 
 
-  const currentPanel =
-    document.querySelector(
-      "#discord-live-panel"
-    );
-
-
   const status =
-    currentPanel?.querySelector(
+    panel.querySelector(
       "[data-bot-status]"
     );
 
@@ -533,8 +565,13 @@ function showOfflineState() {
 loadDiscordData();
 
 
+/* =========================================================
+   AUTOMATIKUS FRISSÍTÉS
+========================================================= */
+
 /*
-  10 másodpercenként frissítés.
+  10 másodpercenként frissítjük
+  a Discord adatokat.
 */
 
 setInterval(
