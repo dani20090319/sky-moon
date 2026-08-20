@@ -25,20 +25,23 @@ document.querySelectorAll(".nav a").forEach(link => {
   });
 });
 
+
 /* =========================================================
    SKY MOON LIVE DISCORD
 ========================================================= */
 
-const API_URL = "https://notre-visit-gospel-true.trycloudflare.com/api/server";
+const API_URL =
+  "https://notre-visit-gospel-true.trycloudflare.com/api/server";
 
-/*
-  Ha később a weboldalt Cloudflare Tunnelön vagy más
-  publikus címen használjuk, ezt az URL-t át kell majd
-  írni a publikus API címére.
-*/
+
+/* =========================================================
+   DISCORD ADATOK LEKÉRÉSE
+========================================================= */
 
 async function loadDiscordData() {
+
   try {
+
     const response = await fetch(API_URL, {
       cache: "no-store"
     });
@@ -60,26 +63,98 @@ async function loadDiscordData() {
     updateDiscordUI(data);
 
   } catch (error) {
+
     console.error(
       "❌ Discord API hiba:",
       error
     );
 
     showOfflineState();
+
   }
+
 }
 
+
 /* =========================================================
-   ADATOK MEGJELENÍTÉSE
+   FŐOLDAL STATISZTIKÁK
+========================================================= */
+
+function updateHeroStats(server) {
+
+  /* TAGOK */
+
+  const memberCount =
+    document.querySelector("#memberCount");
+
+  if (memberCount) {
+
+    memberCount.textContent =
+      server.members;
+
+  }
+
+
+  /* ONLINE */
+
+  const onlineCount =
+    document.querySelector("#onlineCount");
+
+  if (onlineCount) {
+
+    onlineCount.textContent =
+      server.online;
+
+  }
+
+
+  /* ONLINE KÁRTYA */
+
+  const floatingOnline =
+    document.querySelector(".card-online strong");
+
+  if (floatingOnline) {
+
+    floatingOnline.textContent =
+      `${server.online} Online`;
+
+  }
+
+
+  const floatingOnlineSmall =
+    document.querySelector(".card-online small");
+
+  if (floatingOnlineSmall) {
+
+    floatingOnlineSmall.textContent =
+      `${server.members} tag`;
+
+  }
+
+}
+
+
+/* =========================================================
+   DISCORD ADATOK MEGJELENÍTÉSE
 ========================================================= */
 
 function updateDiscordUI(data) {
+
   const server = data.server;
   const bot = data.bot;
 
+
   /*
-    Ha még nincs Live panel az index.html-ben,
-    automatikusan létrehozzuk.
+    A legfontosabb:
+    a HERO tetején lévő TAG és ONLINE értékek
+    frissítése.
+  */
+
+  updateHeroStats(server);
+
+
+  /*
+    LIVE PANEL
   */
 
   let panel =
@@ -87,110 +162,153 @@ function updateDiscordUI(data) {
       "#discord-live-panel"
     );
 
+
   if (!panel) {
-    panel = createLivePanel();
+
+    panel =
+      createLivePanel();
+
   }
+
 
   const serverName =
     panel.querySelector(
       "[data-server-name]"
     );
 
+
   const serverIcon =
     panel.querySelector(
       "[data-server-icon]"
     );
+
 
   const members =
     panel.querySelector(
       "[data-members]"
     );
 
+
   const online =
     panel.querySelector(
       "[data-online]"
     );
+
 
   const channels =
     panel.querySelector(
       "[data-channels]"
     );
 
+
   const roles =
     panel.querySelector(
       "[data-roles]"
     );
+
 
   const botName =
     panel.querySelector(
       "[data-bot-name]"
     );
 
+
   const botStatus =
     panel.querySelector(
       "[data-bot-status]"
     );
 
+
   if (serverName) {
+
     serverName.textContent =
       server.name;
+
   }
+
 
   if (serverIcon && server.icon) {
+
     serverIcon.src =
       server.icon;
+
   }
+
 
   if (members) {
+
     members.textContent =
       server.members;
+
   }
+
 
   if (online) {
+
     online.textContent =
       server.online;
+
   }
+
 
   if (channels) {
+
     channels.textContent =
       server.channels;
+
   }
+
 
   if (roles) {
+
     roles.textContent =
       server.roles;
+
   }
+
 
   if (botName) {
+
     botName.textContent =
       bot.username;
+
   }
 
+
   if (botStatus) {
+
     botStatus.textContent =
       "● ONLINE";
 
     botStatus.classList.remove(
       "offline"
     );
+
   }
+
 }
+
 
 /* =========================================================
    LIVE PANEL LÉTREHOZÁSA
 ========================================================= */
 
 function createLivePanel() {
+
   const panel =
     document.createElement("section");
+
 
   panel.id =
     "discord-live-panel";
 
+
   panel.className =
     "discord-live-panel";
 
+
   panel.innerHTML = `
+
     <div class="live-panel-inner">
 
       <div class="live-header">
@@ -205,6 +323,7 @@ function createLivePanel() {
           >
 
           <div>
+
             <span class="live-label">
               🔴 LIVE DISCORD
             </span>
@@ -212,9 +331,11 @@ function createLivePanel() {
             <h2 data-server-name>
               Sky Moon
             </h2>
+
           </div>
 
         </div>
+
 
         <div
           class="live-status"
@@ -225,49 +346,70 @@ function createLivePanel() {
 
       </div>
 
+
       <div class="live-stats">
 
         <div class="live-stat">
+
           <span>👥</span>
+
           <strong data-members>
             —
           </strong>
+
           <small>
             TAG
           </small>
+
         </div>
 
+
         <div class="live-stat">
+
           <span>🟢</span>
+
           <strong data-online>
             —
           </strong>
+
           <small>
             ONLINE
           </small>
+
         </div>
 
+
         <div class="live-stat">
+
           <span>💬</span>
+
           <strong data-channels>
             —
           </strong>
+
           <small>
             CSATORNA
           </small>
+
         </div>
 
+
         <div class="live-stat">
+
           <span>🛡️</span>
+
           <strong data-roles>
             —
           </strong>
+
           <small>
             RANG
           </small>
+
         </div>
 
       </div>
+
 
       <div class="live-bot">
 
@@ -276,6 +418,7 @@ function createLivePanel() {
         </div>
 
         <div>
+
           <span>
             SKY MOON BOT
           </span>
@@ -283,6 +426,7 @@ function createLivePanel() {
           <strong data-bot-name>
             Sky Moon Bot
           </strong>
+
         </div>
 
         <div class="bot-online">
@@ -290,6 +434,7 @@ function createLivePanel() {
         </div>
 
       </div>
+
 
       <a
         class="live-join"
@@ -301,56 +446,85 @@ function createLivePanel() {
       </a>
 
     </div>
+
   `;
 
-  /*
-    A CTA elé rakjuk, így nem kell kézzel
-    átalakítanunk az index.html-t.
-  */
 
   const cta =
     document.querySelector(".cta");
 
+
   if (cta) {
+
     cta.parentNode.insertBefore(
       panel,
       cta
     );
+
   } else {
+
     document
       .querySelector("main")
       ?.appendChild(panel);
+
   }
 
+
   return panel;
+
 }
+
 
 /* =========================================================
    OFFLINE ÁLLAPOT
 ========================================================= */
 
 function showOfflineState() {
+
   const panel =
     document.querySelector(
       "#discord-live-panel"
     );
 
-  if (!panel) return;
+
+  /*
+    Ha a panel még nem létezik,
+    létrehozzuk, hogy az OFFLINE állapot
+    akkor is megjelenjen.
+  */
+
+  if (!panel) {
+
+    createLivePanel();
+
+  }
+
+
+  const currentPanel =
+    document.querySelector(
+      "#discord-live-panel"
+    );
+
 
   const status =
-    panel.querySelector(
+    currentPanel?.querySelector(
       "[data-bot-status]"
     );
 
+
   if (status) {
+
     status.textContent =
       "● OFFLINE";
 
     status.classList.add(
       "offline"
     );
+
   }
+
 }
+
 
 /* =========================================================
    INDÍTÁS
@@ -358,9 +532,9 @@ function showOfflineState() {
 
 loadDiscordData();
 
+
 /*
-  10 másodpercenként frissítjük
-  az élő Discord adatokat.
+  10 másodpercenként frissítés.
 */
 
 setInterval(
